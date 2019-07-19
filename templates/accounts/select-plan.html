@@ -1,0 +1,34 @@
+{%  extends 'home/index.html' %}
+
+{% block content %}
+
+
+            <div class="limiter">
+				<div class="container-center">
+					<div class="wrap-center" style="padding: 77px 20px 77px 20px">
+
+                        <form method="POST">
+                            {% csrf_token %}
+                            <h4>Choose Plan:</h4>
+                            <div class="radio">
+                              <label><input type="radio" name="optradio" value="plan1">Plan 1 (10 Status, 25 Likes, 50 Comments)</label>
+                            </div>
+                            <div class="radio">
+                              <label><input type="radio" name="optradio" value="plan2">Plan 2 (20 Status, 40 Likes, 70 Comments)</label>
+                            </div>
+                            <div class="radio ">
+                              <label><input type="radio" name="optradio" value="plan3">Plan 3 (30 Status, 50 Likes, 75 Comments)</label>
+                            </div>
+                            <br>
+                            <button class="btn btn-primary" type="submit" >Submit</button>
+                        </form>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}

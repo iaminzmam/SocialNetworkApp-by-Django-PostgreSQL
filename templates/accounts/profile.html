@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/container-center.css' %}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
+</head>
+<body>
+
+    {% include 'home/navbar.html' %}
+
+    <div class="limiter">
+					<div class="container-center">
+						<div class="wrap-center">
+
+                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                  Add Status                </button><br><br>
+                        {% for each in objs %}
+
+                              <div class="panel panel-primary" style="width:100%">
+                                <div class="panel-heading">{{ each.title }}</div>
+                                <div class="panel-body">{{ each.desc }} </div>
+                                <div class="panel-footer">
+                                    <div style="display:inline-block">
+                                        <form action="{% url 'like_post' %}" method="POST">
+                                            {% csrf_token %}
+                                            <button class="btn btn-default" type="submit" name="post_id" value="{{ each.id }}">
+                                                {% if user.id in each.likes %}
+                                                DisLike
+                                                {% else %}
+                                                Like
+                                                {% endif %}
+                                                <span class="badge"> {{ each.likes|length }}</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div style="display:inline-block; margin:0 0 0 10px"><a href="post/{{ each.pk }}"><button class="btn btn-default">Comments <span class="badge"> 2</span></button></a></div>
+                                </div>
+                              </div>
+                            {% endfor %}
+
+						</div>
+					</div>
+    </div>
+
+
+
+        <!-- POP up Form -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                    <form method="POST">
+                        {% csrf_token %}
+
+                         <div class="form-group">
+                             <label for="id_title">Title:</label>
+                                 {{ form.title }}
+                         </div>
+                         <div class="form-group">
+                              <label for="id_title">Description:</label>
+                               {{ form.desc }}
+                         </div>
+                         <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+</body>
+</html>

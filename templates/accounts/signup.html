@@ -1,0 +1,41 @@
+{% extends 'home/index.html' %}
+
+{% block content %}
+
+    <div class="limiter">
+        <div class="container-center">
+            <div class="wrap-center">
+                <h3>Registration Page</h3><br>
+
+            <form method="POST">
+            {% csrf_token %}
+                <div class="form-group">
+                <label for="id_username">Username:</label>
+                {{ form.username }}
+              </div>
+
+
+              <div class="form-group">
+                <label for="id_email">Email address:</label>
+                {{ form.email }}
+              </div>
+
+              <div class="form-group">
+                <label for="id_password">Password:</label>
+                {{ form.password }}
+              </div>
+
+              <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <br>
+            <br>
+            <a href="{% url 'loginForm' %}">Already Registered</a>
+
+            </div>
+        </div>v
+    </div>
+
+
+
+
+{% endblock %}
